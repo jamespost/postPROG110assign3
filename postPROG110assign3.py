@@ -27,16 +27,18 @@ class AudioEffect():#define a class name "AudioEffect" using psuedocode
     #Psuedocode of AudioEffect functions
     def Amplify(self, amplifyGain):
         """Amplifys the signal of the audio file"""
-
+        print("Amplify()")
         #increases the amplitude of the audio file by the amount of amplifyGain
         self.amplitudePeaks += amplifyGain
-        print(self.filename, " amplified by ", amplifyGain, " dB"," new amplitude peak is ", self.amplitudePeaks, " dB")
+        print("\t", self.filename, " amplified by ", amplifyGain, " dB"," new amplitude peak is ", self.amplitudePeaks, " dB")
 
     def Fade(self, fadeType, fadeTime):
         """Fades in the signal of the audio file"""
         
         if fadeType == "In":
             #sets the amplitude of the file to a minimum value and increases that over fadeTime until it hits the original amplitude peak
+            
+            print("Fade In()")
             #initialize local variables
             self.originalAmplitudePeaks = self.amplitudePeaks
             self.amplitudePeaks = -120
@@ -46,11 +48,11 @@ class AudioEffect():#define a class name "AudioEffect" using psuedocode
                 if self.amplitudePeaks < self.originalAmplitudePeaks:
                     self.amplitudePeaks += ((self.originalAmplitudePeaks -self.amplitudePeaks)/(fadeTime - currentFadeTime))
                     currentFadeTime += 1
-                    print("current amplitude is " , self.amplitudePeaks, " dB")
+                    print("\tcurrent amplitude is " , self.amplitudePeaks, " dB")
                 else:
                     break  
         if fadeType == "Out":
-            
+            print("Fade Out()")
             #initialize local variables
             self.originalAmplitudePeaks = self.amplitudePeaks
             self.amplitudePeakMin = -120
@@ -60,54 +62,57 @@ class AudioEffect():#define a class name "AudioEffect" using psuedocode
                 if self.amplitudePeaks > self.amplitudePeakMin:
                     self.amplitudePeaks -= ((self.originalAmplitudePeaks -self.amplitudePeakMin)/(fadeTime - currentFadeTime))
                     currentFadeTime += 1
-                    print("current amplitude is " , self.amplitudePeaks, " dB")
+                    print("\tcurrent amplitude is " , self.amplitudePeaks, " dB")
                 else:
                     break 
     
     def Echo(self, delayTime, decayFactor):
         """Echos (repeats with amplitude decay) the signal of the audio file"""
-        #
-    
+        #repeat the file after delayTime and decrease its amplitude each repeat by decayFactor
+        print("Echo()")
+        print("\tKeep track of time passing until it matches delayTime")
+        print("\tWhen time == delayTime play the file")
+        print("\tEach time time == delayTime the amplitude of the file will decrease by decayFactor until the file amplitude == -120 dB")
+            
     def Repeat(self, numRepeats):
         """Repeats the signal of the audio file"""
-        #initialize local variables
-        
         #if numRepeats > 0 and the file has finished playing play the file again
+        print("Repeat()")
         while numRepeats > 0:
-            print("The file has repeated playing")
+            print("\tThe file has repeated playing")
             numRepeats -= 1
 
     def Normalize(self, threshold):
         """Normalizes (increases amplitude of the file until the maximum amplitude peak is equal to the normalization threshhold) the signal of the audio file"""
-
+        print("Normalize()")
         #if amplitudePeaks < threshold, set amplitudePeaks to threshold
         if self.amplitudePeaks < threshold:
             amplitudePeaks = threshold
-            print("Normalized audio to ", threshold, " dB")
+            print("\tNormalized audio to ", threshold, " dB")
         else:
-            print("Amplitude cannot exceed Threshold")
+            print("\tAmplitude cannot exceed Threshold")
 
-    #Functionality proof
+#Functionality proof
 
-    #create an instance of an AudioEffect
-    #myTestEffect = AudioEffect("testFileName")
+#create an instance of an AudioEffect
+myTestEffect = AudioEffect("testFileName")
 
-    #print its attributes
-    #str(myTestEffect)
+#print its attributes
+str(myTestEffect)
 
-    #run its Amplify() function
-    #myTestEffect.Amplify(6)
+#run its Amplify() function
+myTestEffect.Amplify(6)
 
-    #run its Fade() function as a fade in
-    #myTestEffect.Fade("In",5)
+#run its Fade() function as a fade in
+myTestEffect.Fade("In",5)
 
-    #run its Fade() function as a fade out
-    #myTestEffect.Fade("Out",5)
+#run its Fade() function as a fade out
+myTestEffect.Fade("Out",5)
 
-    #run its Echo() function
+#run its Echo() function
+myTestEffect.Echo(5,3)
+#run its Repeat() function
+myTestEffect.Repeat(3)
 
-    #run its Repeat() function
-    #myTestEffect.Repeat(3)
-    
-    #run its Normalize() function
-    #myTestEffect.Normalize(-3)
+#run its Normalize() function
+myTestEffect.Normalize(-3)
