@@ -1,5 +1,5 @@
 """James Post PROG 110 Assignment 3"""
-#this class was tested using Python 3.7.3
+#this module was tested using Python 3.7.3, the print functions used in it will not work with python 2.x
 class AudioEffect():#define a class name "AudioEffect" using psuedocode
     def __init__(self, filename):
         """Initialize effect attributes"""
