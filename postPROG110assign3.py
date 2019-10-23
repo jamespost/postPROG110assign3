@@ -1,5 +1,5 @@
 """James Post PROG 110 Assignment 3"""
-class AudioEffects():#define a class name "AudioEffects" using psuedocode
+class AudioEffect():#define a class name "AudioEffect" using psuedocode
     def __init__(self, filename):
         """Initialize effect attributes"""
         #store the filename of the audiofile being passed in
@@ -13,7 +13,7 @@ class AudioEffects():#define a class name "AudioEffects" using psuedocode
         #calculate amplitude peaks
         self.amplitudePeaks = float(0)#default peak is 0dB        
 
-    def __str___(self):
+    def __str__(self):#This is code is based off of the example code from "carClassy.py" but doesn't seem to format correctly
             """Defines what to do when the default python str() function is called on an instance"""
             print("Audio File Info:")
             print("\tFilename = " , self.filename)
@@ -21,3 +21,7 @@ class AudioEffects():#define a class name "AudioEffects" using psuedocode
             print("\tSample Rate = " , self.sampleRate)
             print("\tLength = " , self.length)
             print("\tAmplitude Peaks = " , self.amplitudePeaks)
+            return("")
+
+    def Amplify():
+        
