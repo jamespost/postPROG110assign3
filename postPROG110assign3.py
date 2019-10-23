@@ -70,7 +70,12 @@ class AudioEffect():#define a class name "AudioEffect" using psuedocode
     
     def Repeat(self, numRepeats):
         """Repeats the signal of the audio file"""
+        #initialize local variables
         
+        #if numRepeats > 0 and the file has finished playing play the file again
+        while numRepeats > 0:
+            print("The file has repeated playing")
+            numRepeats -= 1
 
     def Normalize(self, threshold):
         """Normalizes (increases amplitude of the file until the maximum amplitude peak is equal to the normalization threshhold) the signal of the audio file"""
@@ -83,3 +88,26 @@ class AudioEffect():#define a class name "AudioEffect" using psuedocode
             print("Amplitude cannot exceed Threshold")
 
     #Functionality proof
+
+    #create an instance of an AudioEffect
+    #myTestEffect = AudioEffect("testFileName")
+
+    #print its attributes
+    #str(myTestEffect)
+
+    #run its Amplify() function
+    #myTestEffect.Amplify(6)
+
+    #run its Fade() function as a fade in
+    #myTestEffect.Fade("In",5)
+
+    #run its Fade() function as a fade out
+    #myTestEffect.Fade("Out",5)
+
+    #run its Echo() function
+
+    #run its Repeat() function
+    #myTestEffect.Repeat(3)
+    
+    #run its Normalize() function
+    #myTestEffect.Normalize(-3)
