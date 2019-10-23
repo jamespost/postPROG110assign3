@@ -32,31 +32,45 @@ class AudioEffect():#define a class name "AudioEffect" using psuedocode
         self.amplitudePeaks += amplifyGain
         print(self.filename, " amplified by ", amplifyGain, " dB"," new amplitude peak is ", self.amplitudePeaks, " dB")
 
-    def FadeIn(self, fadeTime):
+    def Fade(self, fadeType, fadeTime):
         """Fades in the signal of the audio file"""
-        #sets the amplitude of the file to a minimum value and increases that over fadeTime until it hits the original amplitude peak
-        #initialize local variables
-        self.originalAmplitudePeaks = self.amplitudePeaks
-        self.amplitudePeaks = -120
-        currentFadeTime = 0
-        #while startFadeTime < fadeTime increase amplitudePeaks by fadeFactor
-        while currentFadeTime < fadeTime:
-            if self.amplitudePeaks < self.originalAmplitudePeaks:
-                self.amplitudePeaks += ((self.originalAmplitudePeaks -self.amplitudePeaks)/(fadeTime - currentFadeTime))
-                currentFadeTime += 1
-                print("current amplitude is " , self.amplitudePeaks, " dB")
-            else:
-                break            
-
-
-    def FadeOut(self, fadeFactor, fadeTime):
-        """Fades out the signal of the audio file"""
-
+        
+        if fadeType == "In":
+            #sets the amplitude of the file to a minimum value and increases that over fadeTime until it hits the original amplitude peak
+            #initialize local variables
+            self.originalAmplitudePeaks = self.amplitudePeaks
+            self.amplitudePeaks = -120
+            currentFadeTime = 0
+            #while startFadeTime < fadeTime increase amplitudePeaks 
+            while currentFadeTime < fadeTime:
+                if self.amplitudePeaks < self.originalAmplitudePeaks:
+                    self.amplitudePeaks += ((self.originalAmplitudePeaks -self.amplitudePeaks)/(fadeTime - currentFadeTime))
+                    currentFadeTime += 1
+                    print("current amplitude is " , self.amplitudePeaks, " dB")
+                else:
+                    break  
+        if fadeType == "Out":
+            
+            #initialize local variables
+            self.originalAmplitudePeaks = self.amplitudePeaks
+            self.amplitudePeakMin = -120
+            currentFadeTime = 0
+            #while startFadeTime < fadeTime decrease amplitudePeaks
+            while currentFadeTime < fadeTime:
+                if self.amplitudePeaks > self.amplitudePeakMin:
+                    self.amplitudePeaks -= ((self.originalAmplitudePeaks -self.amplitudePeakMin)/(fadeTime - currentFadeTime))
+                    currentFadeTime += 1
+                    print("current amplitude is " , self.amplitudePeaks, " dB")
+                else:
+                    break 
+    
     def Echo(self, delayTime, decayFactor):
         """Echos (repeats with amplitude decay) the signal of the audio file"""
+        #
     
     def Repeat(self, numRepeats):
         """Repeats the signal of the audio file"""
+        
 
     def Normalize(self, threshold):
         """Normalizes (increases amplitude of the file until the maximum amplitude peak is equal to the normalization threshhold) the signal of the audio file"""
@@ -67,3 +81,5 @@ class AudioEffect():#define a class name "AudioEffect" using psuedocode
             print("Normalized audio to ", threshold, " dB")
         else:
             print("Amplitude cannot exceed Threshold")
+
+    #Functionality proof
